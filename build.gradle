@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.11'
+    id 'io.spring.dependency-management' version '1.1.3'
+}
+
+group = 'dev.isaac.tests'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+ext {
+    camelVersion = '4.0.0'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    configureEach {
+        /* only junit 5 should be used */
+        exclude group: 'junit', module: 'junit'
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        /* exclude commons-logging to avoid loggers conflicts */
+        exclude group: 'commons-logging', module: 'commons-logging'
+    }
+}
+
+dependencies {
+    implementation "org.apache.camel.springboot:camel-spring-boot-xml-starter:${camelVersion}"
+    //implementation "org.apache.camel.springboot:camel-spring-boot:${camelVersion}"
+    implementation "org.apache.camel.springboot:camel-activemq-starter:${camelVersion}"
+    implementation "org.apache.camel:camel-management:${camelVersion}"
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'io.hawt:hawtio-springboot:4.0-M1'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

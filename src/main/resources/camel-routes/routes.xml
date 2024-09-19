@@ -1,0 +1,6 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+    <route id="demo-route" errorHandlerRef="globalCamelErrorHandler" >
+        <from uri="activemq:queue:demo-queue"/>
+        <process ref="demoProcessor"/>
+    </route>
+</routes>

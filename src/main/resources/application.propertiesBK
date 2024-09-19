@@ -1,0 +1,19 @@
+camel: 
+  springboot: 
+    routes-include-pattern:
+      classpath: camel-routes/*.xml
+
+  
+management.endpoints.web.exposure.include: hawtio,jolokia
+management.endpoints.jolokia.sensitive: false
+endpoints.jolokia.sensitive : false
+spring.jmx.enabled: true
+camel.springboot.endpoint-runtime-statistics-enabled: true
+management.info.camel.enabled: true
+management.endpoint.camelroutes.enabled: true
+management.endpoint.camelroutes.read-only: true
+camel.springboot.jmx-enabled: true
+hawtio.authenticationEnabled: false
+server:
+  shutdown: graceful
+  port: 8081
